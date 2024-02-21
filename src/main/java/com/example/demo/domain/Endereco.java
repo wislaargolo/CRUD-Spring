@@ -30,7 +30,7 @@ public class Endereco extends AbstractEntity<Long> {
 	@Column(nullable = false, length = 5)
 	private Integer numero;
 
-	private Integer complemento;
+	private String complemento;
 
 	public String getLogradouro() {
 		return logradouro;
@@ -80,11 +80,11 @@ public class Endereco extends AbstractEntity<Long> {
 		this.numero = numero;
 	}
 
-	public Integer getComplemento() {
+	public String getComplemento() {
 		return complemento;
 	}
 
-	public void setComplemento(Integer complemento) {
+	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
 	
