@@ -8,7 +8,7 @@ import com.example.demo.domain.Cargo;
 import com.example.demo.service.CargoService;
 
 @Component
-public class StringToCargoConverter implements Converter<String, Cargo>{
+public class StringToCargoConverter implements Converter<String, Cargo> { 
 	
 	@Autowired
 	private CargoService service;

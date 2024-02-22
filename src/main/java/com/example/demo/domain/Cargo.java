@@ -22,7 +22,7 @@ public class Cargo extends AbstractEntity<Long> {
 	@Column(name = "nome", nullable = false, unique = true, length = 60)
 	private String nome;
 	
-	@NotNull
+	@NotNull(message = "{NotNull.cargo.departamento}")
 	@ManyToOne
 	@JoinColumn(name = "id_departamento_fk")
 	private Departamento departamento;
