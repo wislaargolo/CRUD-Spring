@@ -8,15 +8,21 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "CARGOS")
 public class Cargo extends AbstractEntity<Long> {
 
+	@NotBlank
+	@Size(max = 60)
 	@Column(name = "nome", nullable = false, unique = true, length = 60)
 	private String nome;
 	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "id_departamento_fk")
 	private Departamento departamento;
