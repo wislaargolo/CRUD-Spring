@@ -1,5 +1,7 @@
 package com.example.demo.web.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.domain.Departamento;
@@ -24,20 +27,22 @@ public class DepartamentoController {
 	
 	@GetMapping("/cadastrar")
 	public String cadastrar(Departamento departamento) {
-		return "/departamento/cadastro";
+		return "departamento/cadastro";
 	}
 	
 	@GetMapping("/listar")
-	public String listar(ModelMap model) {
-		model.addAttribute("departamentos", service.buscarTodos());
-		return "/departamento/lista";
+	public String listar(ModelMap model, @RequestParam("page") Optional<Integer> page, 
+										 @RequestParam("dir") Optional<String> dir) {
+		
+		model.addAttribute("pageDepartamento", service.buscarPorPagina(page.orElse(1), dir.orElse("asc")));
+		return "departamento/lista"; 
 	}
 	
 	@PostMapping("/salvar")
 	public String salvar(@Valid Departamento departamento, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
-			return "/departamento/cadastro";
+			return "departamento/cadastro";
 		}
 		
 		service.salvar(departamento);
@@ -48,7 +53,7 @@ public class DepartamentoController {
 	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
 		model.addAttribute("departamento", service.buscarPorId(id));
-		return "/departamento/cadastro";
+		return "departamento/cadastro";
 	}
 	
 	@PostMapping("/editar")
@@ -72,7 +77,7 @@ public class DepartamentoController {
 			service.excluir(id);
 		}
 		
-		return listar(model);
+		return "redirect:/departamento/listar";
 	}
 
 }

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dao.DepartamentoDao;
 import com.example.demo.domain.Departamento;
+import com.example.demo.util.PaginacaoUtil;
 
 @Service @Transactional
 public class DepartamentoServiceImpl implements DepartamentoService {
@@ -48,6 +49,12 @@ public class DepartamentoServiceImpl implements DepartamentoService {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public PaginacaoUtil<Departamento> buscarPorPagina(int pagina, String direcao) {
+
+		return dao.buscaPaginada(pagina, direcao);
 	}
 
 }

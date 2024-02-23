@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.example.demo.domain.Funcionario;
+import com.example.demo.util.PaginacaoUtil;
 
 
 public interface FuncionarioService {
@@ -16,4 +17,5 @@ public interface FuncionarioService {
     List<Funcionario> buscarPorNome(String nome);
 	List<Funcionario> buscarPorCargo(Long id);
 	List<Funcionario> buscarPorDatas(LocalDate entrada, LocalDate saida);
+	PaginacaoUtil<Funcionario> buscarPorPagina(int pagina, String direcao);
 }

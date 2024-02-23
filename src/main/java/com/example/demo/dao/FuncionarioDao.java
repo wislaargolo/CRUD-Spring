@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.example.demo.domain.Funcionario;
+import com.example.demo.util.PaginacaoUtil;
 
 public interface FuncionarioDao {
 	
@@ -17,5 +18,6 @@ public interface FuncionarioDao {
 	List<Funcionario> findByDataEntradaDataSaida(LocalDate entrada, LocalDate saida);
 	List<Funcionario> findByDataEntrada(LocalDate entrada);
 	List<Funcionario> findByDataSaida(LocalDate saida);
+	PaginacaoUtil<Funcionario> buscaPaginada(int pagina, String direcao);
 
 }

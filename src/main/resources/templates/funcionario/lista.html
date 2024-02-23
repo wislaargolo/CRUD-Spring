@@ -92,7 +92,15 @@
 	                    <thead>
 	                    <tr>
 	                        <th>#</th>
-	                        <th th:text="#{tabela.funcionario.col.nome}">Nome</th>
+	                        <th>
+							    <a class="" th:href="@{/funcionarios/listar(page=${pageFuncionario.pagina}, dir=desc)}" tabindex="-1">
+							        <span class="oi oi-arrow-bottom"></span>
+							    </a>
+							    <span th:text="#{tabela.funcionario.col.nome}">Cargo</span>
+							    <a class="" th:href="@{/funcionarios/listar(page=${pageFuncionario.pagina}, dir=asc)}" tabindex="-1">
+							        <span class="oi oi-arrow-top"></span>
+							    </a>
+							</th>
 	                        <th th:text="#{tabela.funcionario.col.salario}">Salário</th>
 	                        <th th:text="#{tabela.funcionario.col.departamento}">Departamento</th>
 	                        <th th:text="#{tabela.funcionario.col.cargo}">Cargo</th>
@@ -103,7 +111,7 @@
 	                    </tr>
 	                    </thead>
 	                    <tbody>
-		                    <tr th:each="f : ${funcionarios}">
+		                    <tr th:each="f : ${pageFuncionario.registros}">
 		                        <td th:text="${f.id}">2</td>
 		                        <td th:text="${f.nome}">Ana Maria Lindoval</td>
 		                        <td th:text="|R$ ${{f.salario}}|">R$ 3.560,70</td>
@@ -139,6 +147,28 @@
 		                    </tr>    
 	                    </tbody>
 	                </table>
+	                
+	                <nav aria-label="Page navigation example">
+					  <ul class="pagination justify-content-center">
+					  <li class="page-item">
+					      <a class="page-link" th:href="@{/funcionarios/listar(page=${1}, dir=${pageFuncionario.direcao})}" tabindex="-1">First</a>
+					    </li>
+					    <li th:class="${pageFuncionario.pagina == 1} ? 'page-item disabled' : 'page-item'">
+					       <a class="page-link" th:href="@{/funcionarios/listar(page=${pageFuncionario.pagina - 1}, 
+					       			 dir=${pageFuncionario.direcao})}" tabindex="-1">Previous</a>
+					    </li>
+					    <li class="page-item">
+					    	<span class="page-link" th:text="|${pageFuncionario.pagina} de ${pageFuncionario.totalDePaginas}|"></span>
+					    </li>
+					    <li th:class="${pageFuncionario.pagina == pageFuncionario.totalDePaginas} ? 'page-item disabled' : 'page-item'">
+					      <a class="page-link" th:href="@{/funcionarios/listar(page=${pageFuncionario.pagina + 1}, dir=${pageFuncionario.direcao})}">Next</a>
+					    </li>
+					    <li class="page-item">
+					      <a class="page-link" th:href="@{/funcionarios/listar(page=${pageFuncionario.totalDePaginas}, dir=${pageFuncionario.direcao})}" tabindex="-1">Last</a>
+					    </li>	
+					  </ul>
+					</nav>
+	                
 	            </div>
 	        </div>
 	        

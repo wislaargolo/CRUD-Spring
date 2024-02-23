@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dao.FuncionarioDao;
 import com.example.demo.domain.Funcionario;
+import com.example.demo.util.PaginacaoUtil;
 
 
 @Service @Transactional(readOnly = true)
@@ -68,6 +69,11 @@ public class FuncionarioServiceImpl implements FuncionarioService {
         } else {
         	return new ArrayList<>();
         }
+	}
+
+	@Override
+	public PaginacaoUtil<Funcionario> buscarPorPagina(int pagina, String direcao) {
+		return dao.buscaPaginada(pagina, direcao);
 	}
 
 }
