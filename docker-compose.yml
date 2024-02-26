@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  db:
+    image: mysql
+    environment:
+      MYSQL_DATABASE: 'demo_mvc_final'
+      MYSQL_ROOT_PASSWORD: 'root12345'
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+volumes:
+  db-data:
+    driver: local
