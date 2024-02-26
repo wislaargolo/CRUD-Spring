@@ -11,6 +11,7 @@ Este projeto é uma aplicação web desenvolvida para facilitar o gerenciamento 
 - **Thymeleaf**
 - **Bootstrap 4**
 - **Hibernate Validator e Bean Validation**
+- **Docker**
 
 
 
