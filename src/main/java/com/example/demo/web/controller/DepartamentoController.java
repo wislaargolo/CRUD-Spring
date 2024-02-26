@@ -69,15 +69,15 @@ public class DepartamentoController {
 	}
 	
 	@GetMapping("/excluir/{id}")
-	public String excluir(@PathVariable("id") Long id, ModelMap model) {
+	public String excluir(@PathVariable("id") Long id, RedirectAttributes attr) {
 		if(service.departamentoTemCargos(id)) {
-			model.addAttribute("fail", "Departamento não removido. Possui cargo(s) vinculado(s).");
+			attr.addFlashAttribute("fail", "Departamento não removido. Possui cargo(s) vinculado(s).");
 		} else {
-			model.addAttribute("success", "Departamento excluído com sucesso.");
 			service.excluir(id);
+			attr.addFlashAttribute("success", "Departamento excluído com sucesso.");
 		}
 		
-		return "redirect:/departamento/listar";
+		return "redirect:/departamentos/listar";
 	}
 
 }
